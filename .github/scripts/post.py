@@ -112,7 +112,7 @@ def get_info(ID):
     with open(f"{jsonDir[BUILD_TYPE]}/{device}") as device_file:
         info = json.loads(device_file.read())['response'][0]
         SIGMA_VERSION = info['version']
-        DEVICE_NAME = info['device_name']
+        DEVICE_NAME = info['device']
         DEVICE_CODENAME = device.split('.')[0]
         MAINTAINER = info['maintainer']
         SUPPORT_GROUP = info.get('support_group', None)
@@ -135,7 +135,7 @@ def get_info(ID):
         print(msg)
         return {
             "sigma_version": SIGMA_VERSION,
-            "device_name": DEVICE_NAME,
+            "device": DEVICE_NAME,
             "codename": DEVICE_CODENAME,
             "maintainer": MAINTAINER,
             "support_group": SUPPORT_GROUP,
@@ -155,7 +155,7 @@ def send_post(chat_id, image, caption, button):
 def message_content(information):
     msg = ""
     msg += f"<b>SigmaDroid Project OFFICIAL - A14</b> <b>(</b><code>{information['sigma_version']}</code><b>)</b>\n\n"
-    msg += f"<b>Device:</b> <code>{information['device_name']} ({information['codename']})</code>\n"
+    msg += f"<b>Device:</b> <code>{information['device']} ({information['codename']})</code>\n"
     if isinstance(information['maintainer'], List):
         msg += f"<b>Maintainers:</b> "
         msg += " | ".join([f"<a href='https://t.me/{x}'>{x}</a>" for x in information['maintainer']])
@@ -201,7 +201,7 @@ def tg_message():
             for CHAT_ID in CHAT_IDS:
                 with open(BANNER_PATH, "rb") as image:
                     send_post(CHAT_ID, image, message_content(info), button(info))
-            commit_description += f"- {info['device_name']} ({info['codename']})\n"
+            commit_description += f"- {info['device']} ({info['codename']})\n"
             sleep(5)
     update(get_new_id())
     open("commit_mesg.txt", "w+").write(f"SigmaDroid: {commit_message} [BOT]\n\n{commit_description}")

@@ -44,7 +44,7 @@ except KeyError:
 
 REPOST_MD5 = getConfig("REPOST_MD5")
 
-BANNER_PATH = "./assets/banner.jpg"
+BANNER_PATH = "./assets/banner.png"
 
 # Init bot
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")

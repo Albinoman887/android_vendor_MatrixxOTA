@@ -13,8 +13,8 @@ on:
         type: string
 
 env:
-  GitHubMail: "mdst798@gmail.com"
-  GitHubName: "Matrrixx-bot"
+  GitHubMail: "matt.filetto@outlook.com"
+  GitHubName: "SigmaDroid-Bot"
   GitHubToken: ${{ secrets.GH_TOKEN }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   CHAT_IDS: ${{ secrets.CHAT_IDS }}

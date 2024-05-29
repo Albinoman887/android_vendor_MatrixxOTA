@@ -1,0 +1,28 @@
+{
+	"response": [
+		{
+			"maintainer": "Albinoman887",
+			"oem": "Google",
+			"device": "Pixel 8 Pro",
+			"filename": "SigmaDroid-v4.5.1-20240529-OFFICIAL-gapps-husky.zip",
+			"download": "https://sigmadroid.xyz/downloads/Home/Husky/OTAs/SigmaDroid-v4.5.1-20240529-OFFICIAL-gapps-husky.zip",
+			"timestamp": 1716984541,
+			"md5": "c773ec74cbca6e4488e0fcddb0933a44",
+			"sha256": "c311e92ed2f575e7d8c334f82d45cb0b8acfd65b19e3e36f1c58c9ab68764f12",
+			"size": 2517490482,
+			"version": "4.5.1",
+			"buildtype": "gapps",
+			"forum": "https://xdaforums.com/t/sigmadroid-android-14-the-kitchen-sink-rom.4653253/",
+			"gapps": "",
+			"firmware": "",
+			"modem": "",
+			"bootloader": "",
+			"recovery": "https://sigmadroid.xyz/downloads/Home/Husky/Recovery/vendor_boot.img",
+			"paypal": "https://paypal.me/albinoman887",
+			"telegram": "https://t.me/SigmaDroidROMChat",
+			"dt": "https://github.com/SigmaDroid-devices/device_google_shusky",
+			"common-dt": "https://github.com/SigmaDroid-devices/device_google_zuma",
+			"kernel": "https://android.googlesource.com/device/google/shusky-kernel/"
+		}
+	]
+}

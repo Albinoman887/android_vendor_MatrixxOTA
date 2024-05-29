@@ -20,6 +20,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
+# GH_TOKEN: ghp_ tV9Vecl6SogbHFYRxEDdipxqPXcL8O1wbqqG
+# BOT_TOKEN: 7418569478:AAHS3YSSw1RzCHHw0wus4YpAuI462-Mj65U
+# CHAT_IDS: -1001534046694 
 
 import telebot
 import os
@@ -48,8 +51,8 @@ bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
 
 # File directories
 jsonDir = {
-    "Gapps": ".",
-    "Vanilla": "./vanila"
+    "gapps": ".",
+    "vanilla": "./vanila"
 }
 idDir = ".github/scripts"
 
@@ -108,34 +111,37 @@ def get_info(ID):
         exit(1)
     with open(f"{jsonDir[BUILD_TYPE]}/{device}") as device_file:
         info = json.loads(device_file.read())['response'][0]
-        MATRIXX_VERSION = info['version']
+        SIGMA_VERSION = info['version']
         DEVICE_NAME = info['device_name']
         DEVICE_CODENAME = device.split('.')[0]
         MAINTAINER = info['maintainer']
         SUPPORT_GROUP = info.get('support_group', None)
         DOWNLOAD_URL = info['download']
+        FILENAME = info['filename']
         DATE_TIME = datetime.datetime.fromtimestamp(int(info['timestamp']))
         MD5 = info['md5']
         SIZE = round(int(info['size'])/1000000000, 2)
         msg = ""
-        msg += f"Project Matrixx {MATRIXX_VERSION}\n"
+        msg += f"SigmaDroid Project {SIGMA_VERSION}\n"
         msg += f"Device Name: {DEVICE_NAME} ({DEVICE_CODENAME})\n"
         msg += f"Maintainer: {MAINTAINER}\n"
         msg += f"Support Group: {SUPPORT_GROUP}\n"
         msg += f"Date Time: {DATE_TIME}\n"
         msg += f"Build Type: {BUILD_TYPE}\n"
         # msg += f"Download URL: {DOWNLOAD_URL}\n"
+        msg += f"Filename: {FILENAME}\n"
         msg += f"Size: {SIZE}G\n"
         msg += f"MD5: {MD5}\n\n"
         print(msg)
         return {
-            "matrixx_version": MATRIXX_VERSION,
+            "sigma_version": SIGMA_VERSION,
             "device_name": DEVICE_NAME,
             "codename": DEVICE_CODENAME,
             "maintainer": MAINTAINER,
             "support_group": SUPPORT_GROUP,
             "datetime": DATE_TIME,
             "build_type": BUILD_TYPE,
+            "filename": FILENAME,
             "size": SIZE,
             "md5": MD5,
             "download": DOWNLOAD_URL
@@ -148,7 +154,7 @@ def send_post(chat_id, image, caption, button):
 # Prepare message format for channel
 def message_content(information):
     msg = ""
-    msg += f"<b>Project Matrixx OFFICIAL - A14</b> <b>(</b><code>{information['matrixx_version']}</code><b>)</b>\n\n"
+    msg += f"<b>SigmaDroid Project OFFICIAL - A14</b> <b>(</b><code>{information['sigma_version']}</code><b>)</b>\n\n"
     msg += f"<b>Device:</b> <code>{information['device_name']} ({information['codename']})</code>\n"
     if isinstance(information['maintainer'], List):
         msg += f"<b>Maintainers:</b> "
@@ -158,19 +164,20 @@ def message_content(information):
         msg += f"<b>Maintainer:</b> <a href='https://t.me/{information['maintainer']}'>{information['maintainer']}</a>\n"
     msg += f"<b>Build Date:</b> <code>{information['datetime']} UTC</code>\n"
     msg += f"<b>Build Type:</b> <code>{information['build_type']}</code>\n\n"
-    msg += f"<b>Changelogs:</b> <a href='https://www.projectmatrixx.org/changelog'>Source</a> <b>|</b> <a href='https://www.projectmatrixx.org/downloads/{information['''codename''']}'>Device</a>\n"
-    msg += f"<b>Screenshots:</b> <a href='https://www.projectmatrixx.org/gallery'>Here</a>\n"
-    msg += f"\n#{information['codename']} #Matrixx #Android14"
+    filenameBase = information['filename'].replace(".zip", "")
+    msg += f"<b>Changelogs:</b> <a href='https://sigmadroid.xyz/downloads/Home/Husky/Changelogs/Changelog.txt'>Source</a> <b>|</b> <a href='https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/Changelogs/{filenameBase}-Changelog.txt'>Device</a>\n"
+    msg += f"<b>Screenshots:</b> <a href='https://sigmadroid.xyz/Screenshots'>Here</a>\n"
+    msg += f"\n#{information['codename']} #SigmaDroid #Android14"
     return msg
 
 # Prepare buttons for message
 def button(information):
-    support = information['support_group'] if information['support_group'] is not None else 'https://t.me/matrixx_community'
+    support = information['support_group'] if information['support_group'] is not None else 'https://t.me/SigmaDroidROMChat'
     buttons = InlineKeyboardMarkup()
     buttons.row_width = 2
-    button1 = InlineKeyboardButton(text="Channel", url=f"https://t.me/projectmatrixx")
+    button1 = InlineKeyboardButton(text="Channel", url=f"https://t.me/SigmaDroidAnnouncements")
     button2 = InlineKeyboardButton(text="Support", url=support)
-    button3 = InlineKeyboardButton(text="Download", url=f"https://www.projectmatrixx.org/downloads/{information['codename']}")
+    button3 = InlineKeyboardButton(text="Download", url=f"https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/OTAs/{information['filename']}")
     return buttons.add(button1, button2, button3)
 
 # Send updates to channel and commit changes in repo
@@ -197,7 +204,7 @@ def tg_message():
             commit_description += f"- {info['device_name']} ({info['codename']})\n"
             sleep(5)
     update(get_new_id())
-    open("commit_mesg.txt", "w+").write(f"Matrixx: {commit_message} [BOT]\n\n{commit_description}")
+    open("commit_mesg.txt", "w+").write(f"SigmaDroid: {commit_message} [BOT]\n\n{commit_description}")
 
 
 # Final stuffs

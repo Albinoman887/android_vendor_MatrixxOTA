@@ -154,7 +154,7 @@ def send_post(chat_id, image, caption, button):
 # Prepare message format for channel
 def message_content(information):
     msg = ""
-    msg += f"<b>SigmaDroid Project OFFICIAL - A14</b> <b>(</b><code>{information['sigma_version']}</code><b>)</b>\n\n"
+    msg += f"<b>SigmaDroid Project TEST POST PLEASE IGNORE!!! - A14</b> <b>(</b><code>{information['sigma_version']}</code><b>)</b>\n\n"
     msg += f"<b>Device:</b> <code>{information['device']} ({information['codename']})</code>\n"
     if isinstance(information['maintainer'], List):
         msg += f"<b>Maintainers:</b> "
@@ -177,8 +177,10 @@ def button(information):
     buttons.row_width = 2
     button1 = InlineKeyboardButton(text="Channel", url=f"https://t.me/SigmaDroidAnnouncements")
     button2 = InlineKeyboardButton(text="Support", url=support)
-    button3 = InlineKeyboardButton(text="Download", url=f"https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/OTAs/{information['filename']}")
-    return buttons.add(button1, button2, button3)
+    button3 = InlineKeyboardButton(text="Changelog", url=f"https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/Changelogs/{information['filename'].replace('.zip', '')}-Changelog.txt")
+    button4 = InlineKeyboardButton(text="Download", url=f"https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/OTAs/{information['filename']}")
+    button5 = InlineKeyboardButton(text="Donate", url=f"https://paypal.me/albinoman887")
+    return buttons.add(button1, button2, button3, button4, button5)
 
 # Send updates to channel and commit changes in repo
 def tg_message():

@@ -165,8 +165,10 @@ def message_content(information):
     msg += f"<b>Build Date:</b> <code>{information['datetime']} UTC</code>\n"
     msg += f"<b>Build Type:</b> <code>{information['build_type']}</code>\n\n"
     filenameBase = information['filename'].replace(".zip", "")
-    msg += f"<b>Changelogs:</b> <a href='https://sigmadroid.xyz/downloads/Home/Husky/Changelogs/Changelog.txt'>Source</a> <b>|</b> <a href='https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/Changelogs/{filenameBase}-Changelog.txt'>Device</a>\n"
+    # msg += f"<b>Changelogs:</b> <a href='https://sigmadroid.xyz/downloads/Home/Husky/Changelogs/Changelog.txt'>Source</a> <b>|</b> <a href='https://sigmadroid.xyz/downloads/Home/{information['codename'].capitalize()}/Changelogs/{filenameBase}-Changelog.txt'>Device</a>\n"
+    msg += f"<b>Release Notes:</b> <a href='https://raw.githubusercontent.com/SigmaDroid-devices/OTA/sigma-14.2/release_notes.txt'>Here</a>\n"
     msg += f"<b>Screenshots:</b> <a href='https://sigmadroid.xyz/Screenshots'>Here</a>\n"
+    msg += f"<b>Official Website:</b> <a href='https://sigmadroid.xyz'>Here</a>\n"
     msg += f"\n#{information['codename']} #SigmaDroid #Android14"
     return msg
 
